@@ -5,6 +5,7 @@ let ParticleSystem = function (position) {
     this.numberOfParticles = 2;
     this.incrementParticles = 2;
     this.initialRadius = 80;
+    this.level = 1;
 };
 
 ParticleSystem.prototype.addParticles = function () {
@@ -38,6 +39,7 @@ ParticleSystem.prototype.run = function () {
 
     if (this.particles.length === 0) {
         this.resetParticles();
+        this.level++;
     }
 };
 
@@ -50,4 +52,8 @@ ParticleSystem.prototype.doubleUp = function (particle) {
     for (let i = 0; i < 2; i++) {
         this.particles.push(new Particle(particle.position, particle.radius / 1.5));
     }
+};
+
+ParticleSystem.prototype.getCurrentLevel = function () {
+    return this.level;
 };

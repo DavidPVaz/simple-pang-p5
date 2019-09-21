@@ -10,13 +10,20 @@ function setup() {
     createCanvas(screenWidth, screenHeight);//(1665, 860);
     system = new ParticleSystem(createVector(screenWidth / 2, screenHeight / 6));
     player = new Player(createVector(width / 2, height));
+    textSize(50);
+    textAlign(CENTER, CENTER);
 }
 
 function draw() {
     background(200, 200, 200);
 
+
     system.addParticles();
     system.run();
+
+    noStroke();
+    fill(0);
+    text('Level: ' + nf(system.getCurrentLevel()), screenWidth * 0.06, screenHeight * 0.05);
 
     player.start(system.getParticles());
     player.move();
