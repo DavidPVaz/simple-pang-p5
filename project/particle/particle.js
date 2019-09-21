@@ -1,10 +1,10 @@
 // A simple Particle class
-let Particle = function (position) {
-    this.acceleration = createVector(0, 0.05);
+let Particle = function (position, radius) {
+    this.acceleration = createVector(0, 0.1);
     this.velocity = createVector(random(-3, 3), random(-2.5, 0));
     this.position = position.copy();
-    this.lifespan = 200;
-    this.radius = 80;
+    this.isDead = false;
+    this.radius = radius;
 };
 
 
@@ -46,7 +46,6 @@ Particle.prototype.checkEdges = function () {
     }
 };
 
-// Is the particle still useful?
-Particle.prototype.isDead = function () {
-    return this.lifespan <= 0;
+Particle.prototype.die = function () {
+    this.isDead = true;
 };
