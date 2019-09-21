@@ -5,11 +5,19 @@ let ParticleSystem = function (position) {
     this.numberOfParticles = 8;
 };
 
-ParticleSystem.prototype.addParticle = function () {
-    this.particles.push(new Particle(this.origin));
+ParticleSystem.prototype.addParticles = function() {
+    for (let i = 0; i < this.numberOfParticles; i++) {
+        this.particles.push(new Particle(this.origin));
+    }
+    
+    this.numberOfParticles = 0;
 };
 
-ParticleSystem.prototype.run = function () {
+ParticleSystem.prototype.resetParticles = function() {
+    this.numberOfParticles = 8;
+}
+
+ParticleSystem.prototype.run = function() {
     for (let i = this.particles.length - 1; i >= 0; i--) {
         let particle = this.particles[i];
         particle.run();
