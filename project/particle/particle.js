@@ -9,12 +9,12 @@ let Particle = function (position, radius) {
 
 
 Particle.prototype.run = function () {
-    this.update();
+    this.move();
     this.show();
 };
 
 // Method to update position
-Particle.prototype.update = function () {
+Particle.prototype.move = function () {
     this.velocity.add(this.acceleration);
     this.position.add(this.velocity);
 };
@@ -31,18 +31,18 @@ Particle.prototype.show = function () {
 Particle.prototype.checkEdges = function () {
     if (this.position.y > (screenHeight - this.radius)) {
         // A little dampening when hitting the bottom
-        this.velocity.y *= -1;
         this.position.y = (screenHeight - this.radius);
+        this.velocity.y *= -1;
     }
 
     if (this.position.x < (0 + this.radius)) {
-        this.velocity.x *= -1;
         this.position.x = (0 + this.radius);
+        this.velocity.x *= -1;
     }
 
     if (this.position.x > (screenWidth - this.radius)) {
-        this.velocity.x *= -1;
         this.position.x = (screenWidth - this.radius);
+        this.velocity.x *= -1;
     }
 };
 

@@ -1,7 +1,10 @@
 let system;
 let player;
+let rightIsBeingPressed = false;
+let leftIsBeingPressed = false;
 const screenWidth = 1665;
 const screenHeight = 860;
+const SPACE = 32;
 
 function setup() {
     createCanvas(screenWidth, screenHeight);//(1665, 860);
@@ -10,26 +13,54 @@ function setup() {
 }
 
 function draw() {
-    background(10, 10, 10);
+    background(200, 200, 200);
 
     system.addParticles();
     system.run();
 
     player.start(system.getParticles());
-
-    if (keyCode === RIGHT_ARROW && keyIsPressed) {
-        player.move(1);
-    } else if (keyCode === LEFT_ARROW && keyIsPressed) {
-        player.move(-1);
-    }
+    player.move();
 
 }
 
 function keyPressed() {
 
     switch (keyCode) {
-        case BACKSPACE:
+        case LEFT_ARROW:
+            player.setDirection(-1);
+            leftIsBeingPressed = true;
+            break;
+        case RIGHT_ARROW:
+            player.setDirection(1);
+            rightIsBeingPressed = true;
+            break;
+        case SPACE:
             player.loadBullets();
             break;
+        case UP_ARROW:
+            console.log("up pressed")
+            player.jump();
+            break;
     }
+}
+
+function keyReleased() {
+
+    if (keyCode !== SPACE && !rightIsBeingPressed || keyCode !== SPACE && !leftIsBeingPressed) {
+        player.setDirection(0);
+    }
+
+    switch (keyCode) {
+        case LEFT_ARROW:
+            leftIsBeingPressed = false;
+            break;
+        case RIGHT_ARROW:
+            rightIsBeingPressed = false;
+            break;
+        case UP_ARROW:
+            console.log("up released");
+            player.fall();
+            break;
+    }
+
 }

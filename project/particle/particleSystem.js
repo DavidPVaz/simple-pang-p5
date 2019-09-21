@@ -2,7 +2,8 @@
 let ParticleSystem = function (position) {
     this.origin = position.copy();
     this.particles = [];
-    this.numberOfParticles = 8;
+    this.numberOfParticles = 2;
+    this.incrementParticles = 2;
     this.initialRadius = 80;
 };
 
@@ -15,7 +16,8 @@ ParticleSystem.prototype.addParticles = function () {
 };
 
 ParticleSystem.prototype.resetParticles = function () {
-    this.numberOfParticles = 8;
+    this.incrementParticles += Math.round(this.incrementParticles / 2);
+    this.numberOfParticles = this.incrementParticles;
 }
 
 ParticleSystem.prototype.getParticles = function () {
@@ -33,15 +35,19 @@ ParticleSystem.prototype.run = function () {
             this.particles.splice(i, 1);
         }
     }
+
+    if (this.particles.length === 0) {
+        this.resetParticles();
+    }
 };
 
 ParticleSystem.prototype.doubleUp = function (particle) {
 
-    if (particle.radius <= 5) {
+    if (particle.radius <= 30) {
         return;
     }
 
     for (let i = 0; i < 2; i++) {
-        this.particles.push(new Particle(particle.position, particle.radius / 2));
+        this.particles.push(new Particle(particle.position, particle.radius / 1.5));
     }
 };
