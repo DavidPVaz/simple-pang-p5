@@ -2,6 +2,7 @@
 let ParticleSystem = function (position) {
     this.origin = position.copy();
     this.particles = [];
+    this.numberOfParticles = 8;
 };
 
 ParticleSystem.prototype.addParticle = function () {

@@ -27,7 +27,7 @@ Particle.prototype.checkEdges = function () {
 
 Particle.prototype.run = function () {
     this.update();
-    this.display();
+    this.show();
 };
 
 // Method to update position
@@ -37,10 +37,11 @@ Particle.prototype.update = function () {
 };
 
 // Method to display
-Particle.prototype.display = function () {
+Particle.prototype.show = function () {
     stroke(500);
     strokeWeight(4); // ellipes borders
     fill(255, 100, 80); // RGB
+    ellipseMode(CENTER);
     ellipse(this.position.x, this.position.y, this.size, this.size);
 };
 
