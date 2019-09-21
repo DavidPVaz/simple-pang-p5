@@ -9,12 +9,16 @@ ParticleSystem.prototype.addParticles = function() {
     for (let i = 0; i < this.numberOfParticles; i++) {
         this.particles.push(new Particle(this.origin));
     }
-    
+
     this.numberOfParticles = 0;
 };
 
 ParticleSystem.prototype.resetParticles = function() {
     this.numberOfParticles = 8;
+}
+
+ParticleSystem.prototype.getParticles = function () {
+    return this.particles;
 }
 
 ParticleSystem.prototype.run = function() {

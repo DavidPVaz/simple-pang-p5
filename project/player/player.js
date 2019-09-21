@@ -11,13 +11,13 @@ Player.prototype.move = function (direction) {
     this.position.x += direction * this.speed;
 };
 
-Player.prototype.start = function () {
-    this.shoot();
+Player.prototype.start = function (particles) {
+    this.shoot(particles);
     this.show();
 };
 
-Player.prototype.shoot = function () {
-    this.bullets.run();
+Player.prototype.shoot = function (particles) {
+    this.bullets.run(particles);
 }
 
 Player.prototype.show = function () {

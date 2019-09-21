@@ -15,7 +15,7 @@ function draw() {
     system.addParticles();
     system.run();
 
-    player.start();
+    player.start(system.getParticles());
 
     if (keyCode === RIGHT_ARROW && keyIsPressed) {
         player.move(1);
