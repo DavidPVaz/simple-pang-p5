@@ -28,20 +28,20 @@ let Particle = function (position) {
 };
 
 Particle.prototype.checkEdges = function () {
-    if (this.position.y > (screenHeight - this.size/2)) {
+    if (this.position.y > (screenHeight - this.size / 2)) {
         // A little dampening when hitting the bottom
         this.velocity.y *= -0.95;
-        this.position.y = (screenHeight - this.size/2);
-      }
-
-    if (this.position.x < (0 + this.size/2)) {
-        this.velocity.x *= -0.95;
-        this.position.x = (0 + this.size/2);
+        this.position.y = (screenHeight - this.size / 2);
     }
 
-    if (this.position.x > (screenWidth - this.size/2)) {
+    if (this.position.x < (0 + this.size / 2)) {
         this.velocity.x *= -0.95;
-        this.position.x = (screenWidth - this.size/2);
+        this.position.x = (0 + this.size / 2);
+    }
+
+    if (this.position.x > (screenWidth - this.size / 2)) {
+        this.velocity.x *= -0.95;
+        this.position.x = (screenWidth - this.size / 2);
     }
 };
 
@@ -69,6 +69,7 @@ Particle.prototype.isDead = function () {
     return this.lifespan <= 0;
 };
 
+
 let ParticleSystem = function (position) {
     this.origin = position.copy();
     this.particles = [];
@@ -88,4 +89,5 @@ ParticleSystem.prototype.run = function () {
             this.particles.splice(i, 1);
         }
     }
-};
+}
+
