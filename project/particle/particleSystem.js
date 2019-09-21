@@ -54,6 +54,8 @@ ParticleSystem.prototype.doubleUp = function (particle) {
     }
 };
 
-ParticleSystem.prototype.getCurrentLevel = function () {
-    return this.level;
+ParticleSystem.prototype.printLevel = function () {
+    noStroke();
+    fill(0);
+    text('Level: ' + nf(this.level), screenWidth * 0.06, screenHeight * 0.04);
 };

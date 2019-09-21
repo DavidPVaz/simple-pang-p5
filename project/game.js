@@ -15,16 +15,12 @@ function setup() {
 }
 
 function draw() {
-    background(200, 200, 200);
 
-
+    background(165, 180, 175);
     system.addParticles();
     system.run();
-
-    noStroke();
-    fill(0);
-    text('Level: ' + nf(system.getCurrentLevel()), screenWidth * 0.06, screenHeight * 0.05);
-
+    system.printLevel();
+    
     player.start(system.getParticles());
     player.move();
 
