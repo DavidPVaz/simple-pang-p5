@@ -9,7 +9,7 @@ let Player = function (position) {
 };
 
 Player.prototype.jump = function () {
-    this.velocity.y -= this.gravity*6; 
+    this.velocity.y -= this.gravity*8; 
     //this.position.y -= this.velocity.y;
 };
 

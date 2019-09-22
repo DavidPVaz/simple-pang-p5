@@ -2,6 +2,7 @@ let system;
 let player;
 let rightIsBeingPressed = false;
 let leftIsBeingPressed = false;
+let upIsBeingPressed = false;
 const screenWidth = 1665;
 const screenHeight = 860;
 const SPACE = 32;
@@ -39,7 +40,7 @@ function keyPressed() {
             player.loadBullets();
             break;
         case UP_ARROW:
-            console.log("up pressed")
+            upIsBeingPressed = true;
             player.jump();
             break;
     }
@@ -47,7 +48,7 @@ function keyPressed() {
 
 function keyReleased() {
 
-    if (keyCode !== SPACE && !rightIsBeingPressed || keyCode !== SPACE && !leftIsBeingPressed) {
+    if (keyCode !== SPACE && !upIsBeingPressed && !rightIsBeingPressed || keyCode !== SPACE && !upIsBeingPressed && !leftIsBeingPressed){ //&& keyCode !== SPACE && !upIsBeingPressed) {
         player.setDirection(0);
     }
 
@@ -59,7 +60,7 @@ function keyReleased() {
             rightIsBeingPressed = false;
             break;
         case UP_ARROW:
-            player.jump();
+            upIsBeingPressed = false;
             break;
     }
 
