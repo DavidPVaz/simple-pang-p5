@@ -16,7 +16,6 @@ BulletSystem.prototype.run = function (particles) {
         bullet.move();
 
         for (let j = 0; j < particles.length; j++) {
-            console.log(bullet.collide(particles[j]));
             if (bullet.hits(particles[j])) {
                 this.bullets.splice(i, 1);
                 particles[j].die();

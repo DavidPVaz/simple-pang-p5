@@ -22,7 +22,7 @@ function draw() {
     system.printLevel();
     
     player.start(system.getParticles());
-    player.move();
+    player.move(system.getParticles());
 
 }
 
@@ -42,7 +42,7 @@ function keyPressed() {
             break;
         case UP_ARROW:
             console.log("up pressed")
-            player.jump();
+            //player.jump();
             break;
     }
 }
@@ -62,7 +62,7 @@ function keyReleased() {
             break;
         case UP_ARROW:
             console.log("up released");
-            player.fall();
+            //player.fall();
             break;
     }
 
