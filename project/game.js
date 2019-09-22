@@ -10,8 +10,6 @@ function setup() {
     createCanvas(screenWidth, screenHeight);//(1665, 860);
     system = new ParticleSystem(createVector(screenWidth / 2, screenHeight / 6));
     player = new Player(createVector(width / 2, height));
-    textSize(50);
-    textAlign(CENTER, CENTER);
 }
 
 function draw() {
@@ -20,7 +18,7 @@ function draw() {
     system.addParticles();
     system.run();
     system.printLevel();
-    
+
     player.start(system.getParticles());
     player.move(system.getParticles());
 
@@ -42,7 +40,7 @@ function keyPressed() {
             break;
         case UP_ARROW:
             console.log("up pressed")
-            //player.jump();
+            player.jump();
             break;
     }
 }
@@ -61,8 +59,7 @@ function keyReleased() {
             rightIsBeingPressed = false;
             break;
         case UP_ARROW:
-            console.log("up released");
-            //player.fall();
+            player.jump();
             break;
     }
 

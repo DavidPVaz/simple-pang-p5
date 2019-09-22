@@ -16,6 +16,7 @@ Bullet.prototype.move = function () {
     this.position.y -= this.speed;
 };
 
+/*
 Bullet.prototype.showLine = function () {
     stroke(126);
     line(this.position.x, this.initialY1, this.position.x, this.initialY2);
@@ -28,11 +29,7 @@ Bullet.prototype.moveLine = function () {
         this.initialY2 -= this.speed;
     }
 };
-
-Bullet.prototype.collide = function (particle) {
-    return this.position.x === particle.position.x - particle.radius ||
-        this.position.x === particle.position.x + particle.radius;
-};
+*/
 
 Bullet.prototype.hits = function (particle) {
 
