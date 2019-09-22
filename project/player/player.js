@@ -1,7 +1,7 @@
 let Player = function (position) {
     this.position = position.copy(); //position has a 'x' and 'y' values from the vector
     this.gravity = 9.5;
-    this.velocity = createVector(7, this.gravity);
+    this.velocity = createVector(10, this.gravity);
     this.direction = 0;
     this.radius = 20;
     this.isDead = false;
@@ -10,7 +10,7 @@ let Player = function (position) {
 
 Player.prototype.jump = function () {
     this.velocity.y -= this.gravity*8; 
-    //this.position.y -= this.velocity.y;
+    this.velocity.x += this.direction;
 };
 
 Player.prototype.fall = function () {
@@ -45,7 +45,7 @@ Player.prototype.setDirection = function (direction) {
     this.direction = direction;
 }
 
-Player.prototype.loadBullets = function () {
+Player.prototype.loadBullet = function () {
     this.bullets.load(this.position.x, this.position.y - this.radius * 2);
 };
 
@@ -81,11 +81,9 @@ Player.prototype.shoot = function (particles) {
 
 Player.prototype.show = function () {
     noStroke();
-    fill(20, 5, 200);
+    fill(54, 202, 239);
     ellipseMode(CENTER);
     ellipse(this.position.x, this.position.y - this.radius, this.radius * 2, this.radius * 2);
-    //rectMode(CENTER);
-    //rect(this.position.x, this.position.y - this.height / 2, this.width, this.height);
 };
 
 

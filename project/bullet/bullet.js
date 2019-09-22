@@ -8,7 +8,7 @@ let Bullet = function (x, y) {
 
 Bullet.prototype.show = function () {
     noStroke();
-    fill(200, 0, 200);
+    fill(247, 67, 12);
     ellipse(this.position.x, this.position.y, this.radius * 2, this.radius * 2);
 };
 

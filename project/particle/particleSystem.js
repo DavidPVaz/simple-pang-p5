@@ -56,7 +56,7 @@ ParticleSystem.prototype.doubleUp = function (particle) {
 
 ParticleSystem.prototype.printLevel = function () {
     noStroke();
-    fill(0);
+    fill(255);
     textSize(50);
     text('Level: ' + nf(this.level), screenWidth * 0.02, screenHeight * 0.08);
 };

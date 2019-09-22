@@ -15,7 +15,7 @@ function setup() {
 
 function draw() {
 
-    background(165, 180, 175);
+    background(54, 49, 53);
     system.addParticles();
     system.run();
     system.printLevel();
@@ -37,7 +37,7 @@ function keyPressed() {
             rightIsBeingPressed = true;
             break;
         case SPACE:
-            player.loadBullets();
+            player.loadBullet();
             break;
         case UP_ARROW:
             upIsBeingPressed = true;
@@ -48,7 +48,7 @@ function keyPressed() {
 
 function keyReleased() {
 
-    if (keyCode !== SPACE && !upIsBeingPressed && !rightIsBeingPressed || keyCode !== SPACE && !upIsBeingPressed && !leftIsBeingPressed){ //&& keyCode !== SPACE && !upIsBeingPressed) {
+    if (keyCode !== SPACE && !upIsBeingPressed && !rightIsBeingPressed || keyCode !== SPACE && !upIsBeingPressed && !leftIsBeingPressed) {
         player.setDirection(0);
     }
 

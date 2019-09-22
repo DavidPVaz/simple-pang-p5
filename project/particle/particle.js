@@ -22,8 +22,8 @@ Particle.prototype.move = function () {
 // Method to display
 Particle.prototype.show = function () {
     stroke(500);
-    strokeWeight(4); // ellipes borders
-    fill(255, 100, 80); // RGB
+    strokeWeight(5); // ellipes borders
+    fill(239, 147, 9); // RGB
     ellipseMode(CENTER);
     ellipse(this.position.x, this.position.y, this.radius * 2, this.radius * 2);
 };
