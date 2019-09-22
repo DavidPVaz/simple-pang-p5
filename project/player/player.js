@@ -1,6 +1,7 @@
 let Player = function (position) {
     this.position = position.copy(); //position has a 'x' and 'y' values from the vector
-    this.gravity = 9.5;
+    this.gravity = 4;
+    this.upForce = this.gravity * 12;
     this.velocity = createVector(10, this.gravity);
     this.direction = 0;
     this.radius = 20;
@@ -9,8 +10,10 @@ let Player = function (position) {
 };
 
 Player.prototype.jump = function () {
-    this.velocity.y -= this.gravity*8; 
-    this.velocity.x += this.direction;
+    if (this.velocity.y === 0) {
+        this.velocity.y -= this.upForce;
+        this.velocity.x += this.direction;
+    }
 };
 
 Player.prototype.fall = function () {
@@ -30,6 +33,11 @@ Player.prototype.checkEdges = function () {
     if (this.position.y > screenHeight) {
         this.position.y = screenHeight;
         this.velocity.y = 0;
+    }
+
+    if (this.position.y < 0) {
+        this.position.y = 0;
+        this.velocity.y *= -0.5;
     }
 
     if (this.position.x - this.radius < 0) {
@@ -68,11 +76,8 @@ Player.prototype.checkCollision = function (particles) {
 };
 
 Player.prototype.hits = function (particle) {
-
     let distance = dist(this.position.x, this.position.y, particle.position.x, particle.position.y);
-
     return distance < this.radius + particle.radius;
-
 };
 
 Player.prototype.shoot = function (particles) {

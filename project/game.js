@@ -6,7 +6,12 @@ let upIsBeingPressed = false;
 const screenWidth = 1665;
 const screenHeight = 860;
 const SPACE = 32;
-
+//const img;
+/*
+function preload() {
+    img = loadImage('images/something.extension');
+}
+*/
 function setup() {
     createCanvas(screenWidth, screenHeight);//(1665, 860);
     system = new ParticleSystem(createVector(screenWidth / 2, screenHeight / 6));
