@@ -2,8 +2,8 @@ let BulletSystem = function () {
     this.bullets = [];
 };
 
-BulletSystem.prototype.load = function (x, y) {
-    this.bullets.push(new Bullet(x, y));
+BulletSystem.prototype.load = function (position, radius) {
+    this.bullets.push(new Bullet(position, radius));
 };
 
 BulletSystem.prototype.run = function (particles) {

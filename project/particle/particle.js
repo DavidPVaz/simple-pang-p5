@@ -11,6 +11,7 @@ let Particle = function (position, radius) {
 Particle.prototype.run = function () {
     this.move();
     this.show();
+    this.checkEdges();
 };
 
 // Method to update position
@@ -29,9 +30,9 @@ Particle.prototype.show = function () {
 };
 
 Particle.prototype.checkEdges = function () {
-    if (this.position.y > (screenHeight - this.radius)) {
+    if (this.position.y > (HEIGHT - this.radius)) {
         // A little dampening when hitting the bottom
-        this.position.y = (screenHeight - this.radius);
+        this.position.y = (HEIGHT - this.radius);
         this.velocity.y *= -1;
     }
 
@@ -40,8 +41,8 @@ Particle.prototype.checkEdges = function () {
         this.velocity.x *= -1;
     }
 
-    if (this.position.x > (screenWidth - this.radius)) {
-        this.position.x = (screenWidth - this.radius);
+    if (this.position.x > (WIDTH - this.radius)) {
+        this.position.x = (WIDTH - this.radius);
         this.velocity.x *= -1;
     }
 };

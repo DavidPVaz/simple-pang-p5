@@ -29,7 +29,6 @@ ParticleSystem.prototype.run = function () {
     for (let i = this.particles.length - 1; i >= 0; i--) {
         let particle = this.particles[i];
         particle.run();
-        particle.checkEdges();
 
         if (particle.isDead) {
             this.doubleUp(particle);
@@ -58,5 +57,5 @@ ParticleSystem.prototype.printLevel = function () {
     noStroke();
     fill(255);
     textSize(50);
-    text('Level: ' + nf(this.level), screenWidth * 0.02, screenHeight * 0.08);
+    text('Level: ' + nf(this.level), WIDTH * 0.02, HEIGHT * 0.08);
 };

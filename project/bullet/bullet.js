@@ -1,10 +1,11 @@
-let Bullet = function (x, y) {
-    this.position = createVector(x, y);
-    this.radius = 10;
+let Bullet = function (position, radius) {
+    Collidable.call(this, position, radius);
+
     this.speed = 5;
-    this.initialY1 = height;
-    this.initialY2 = height * 2;
 };
+
+Bullet.prototype = Object.create(Collidable.prototype);
+Bullet.prototype.constructor = Bullet;
 
 Bullet.prototype.show = function () {
     noStroke();
@@ -14,29 +15,6 @@ Bullet.prototype.show = function () {
 
 Bullet.prototype.move = function () {
     this.position.y -= this.speed;
-};
-
-/*
-Bullet.prototype.showLine = function () {
-    stroke(126);
-    line(this.position.x, this.initialY1, this.position.x, this.initialY2);
-};
-
-Bullet.prototype.moveLine = function () {
-
-    if (this.initialY1 > 0) {
-        this.initialY1 -= this.speed;
-        this.initialY2 -= this.speed;
-    }
-};
-*/
-
-Bullet.prototype.hits = function (particle) {
-
-    let distance = dist(this.position.x, this.position.y, particle.position.x, particle.position.y);
-
-    return distance < this.radius + particle.radius;
-
 };
 
 Bullet.prototype.goOutOfBounds = function () {

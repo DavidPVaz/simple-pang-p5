@@ -1,13 +1,16 @@
-let Player = function (position) {
-    this.position = position.copy(); //position has a 'x' and 'y' values from the vector
+let Player = function (position, radius) {
+    Collidable.call(this, position, radius);
+
     this.gravity = 4;
     this.upForce = this.gravity * 12;
     this.velocity = createVector(10, this.gravity);
     this.direction = 0;
-    this.radius = 20;
     this.isDead = false;
     this.bullets = new BulletSystem();
 };
+
+Player.prototype = Object.create(Collidable.prototype);
+Player.prototype.constructor = Player;
 
 Player.prototype.jump = function () {
     if (this.velocity.y === 0) {
@@ -30,21 +33,17 @@ Player.prototype.move = function () {
 Player.prototype.checkEdges = function () {
 
     //return this.position.x - this.width / 2 + this.direction > 0 && this.position.x + this.width / 2 + this.direction < screenWidth;
-    if (this.position.y > screenHeight) {
-        this.position.y = screenHeight;
+    if (this.position.y > HEIGHT) {
+        this.position.y = HEIGHT;
         this.velocity.y = 0;
-    }
-
-    if (this.position.y < 0) {
+    } else if (this.position.y < 0) {
         this.position.y = 0;
         this.velocity.y *= -0.5;
-    }
-
-    if (this.position.x - this.radius < 0) {
+    } else if (this.position.x - this.radius < 0) {
         this.position.x = 0 + this.radius;
 
-    } else if (this.position.x + this.radius > screenWidth) {
-        this.position.x = screenWidth - this.radius;
+    } else if (this.position.x + this.radius > WIDTH) {
+        this.position.x = WIDTH - this.radius;
     }
 
 };
@@ -54,7 +53,7 @@ Player.prototype.setDirection = function (direction) {
 }
 
 Player.prototype.loadBullet = function () {
-    this.bullets.load(this.position.x, this.position.y - this.radius * 2);
+    this.bullets.load(createVector(this.position.x, this.position.y - this.radius * 2), this.radius / 2);
 };
 
 Player.prototype.start = function (particles) {
@@ -69,15 +68,9 @@ Player.prototype.checkCollision = function (particles) {
         let particle = particles[i];
 
         if (this.hits(particle)) {
-            console.log("Player collided with particle");
             noLoop();
         }
     }
-};
-
-Player.prototype.hits = function (particle) {
-    let distance = dist(this.position.x, this.position.y, particle.position.x, particle.position.y);
-    return distance < this.radius + particle.radius;
 };
 
 Player.prototype.shoot = function (particles) {

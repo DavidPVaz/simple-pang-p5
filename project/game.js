@@ -3,19 +3,19 @@ let player;
 let rightIsBeingPressed = false;
 let leftIsBeingPressed = false;
 let upIsBeingPressed = false;
-const screenWidth = 1665;
-const screenHeight = 860;
+const WIDTH = 1665;
+const HEIGHT = 860;
 const SPACE = 32;
-//const img;
-/*
-function preload() {
-    img = loadImage('images/something.extension');
-}
-*/
+const PLAYER_STARTING_X = WIDTH / 2;
+const PLAYER_STARTING_Y = HEIGHT;
+const PLAYER_STARTING_RADIUS = 20;
+const SYSTEM_STARTING_X = WIDTH / 2;
+const SYSTEM_STARTING_Y = HEIGHT / 6;
+
 function setup() {
-    createCanvas(screenWidth, screenHeight);//(1665, 860);
-    system = new ParticleSystem(createVector(screenWidth / 2, screenHeight / 6));
-    player = new Player(createVector(width / 2, height));
+    createCanvas(WIDTH, HEIGHT);//(1665, 860);
+    system = new ParticleSystem(createVector(SYSTEM_STARTING_X, SYSTEM_STARTING_Y));
+    player = new Player(createVector(PLAYER_STARTING_X, PLAYER_STARTING_Y), PLAYER_STARTING_RADIUS);
 }
 
 function draw() {
