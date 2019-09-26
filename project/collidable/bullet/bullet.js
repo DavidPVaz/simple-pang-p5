@@ -7,6 +7,7 @@ let Bullet = function (position, radius) {
 Bullet.prototype = Object.create(Collidable.prototype);
 Bullet.prototype.constructor = Bullet;
 
+//internals
 Bullet.prototype.show = function () {
     noStroke();
     fill(247, 67, 12);
@@ -17,6 +18,13 @@ Bullet.prototype.move = function () {
     this.position.y -= this.speed;
 };
 
+
+//externals
 Bullet.prototype.goOutOfBounds = function () {
     return this.position.y <= 0;
+}
+
+Bullet.prototype.run = function() {
+    this.show();
+    this.move();
 }

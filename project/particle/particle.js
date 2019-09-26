@@ -8,11 +8,7 @@ let Particle = function (position, radius) {
 };
 
 
-Particle.prototype.run = function () {
-    this.move();
-    this.show();
-    this.checkEdges();
-};
+//internals
 
 // Method to update position
 Particle.prototype.move = function () {
@@ -49,4 +45,15 @@ Particle.prototype.checkEdges = function () {
 
 Particle.prototype.die = function () {
     this.isDead = true;
+};
+
+//externals
+Particle.prototype.run = function () {
+    this.show();
+    this.move();
+    this.checkEdges();
+};
+
+Particle.prototype.isDead = function() {
+    return this.isDead;
 };

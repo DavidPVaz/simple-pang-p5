@@ -2,6 +2,8 @@ let BulletSystem = function () {
     this.bullets = [];
 };
 
+
+//externals
 BulletSystem.prototype.load = function (position, radius) {
     this.bullets.push(new Bullet(position, radius));
 };
@@ -12,8 +14,7 @@ BulletSystem.prototype.run = function (particles) {
 
         let bullet = this.bullets[i];
 
-        bullet.show();
-        bullet.move();
+        bullet.run();
 
         for (let j = 0; j < particles.length; j++) {
             if (bullet.hits(particles[j])) {

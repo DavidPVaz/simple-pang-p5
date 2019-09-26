@@ -8,6 +8,30 @@ let ParticleSystem = function (position) {
     this.level = 1;
 };
 
+ParticleSystem.prototype.resetParticles = function () {
+    this.incrementParticles += Math.round(this.incrementParticles / 2);
+    this.numberOfParticles = this.incrementParticles;
+};
+
+ParticleSystem.prototype.doubleUp = function (particle) {
+
+    if (particle.radius <= 30) {
+        return;
+    }
+
+    for (let i = 0; i < 2; i++) {
+        this.particles.push(new Particle(particle.position, particle.radius / 1.5));
+    }
+};
+
+//externals
+ParticleSystem.prototype.printLevel = function () {
+    noStroke();
+    fill(255);
+    textSize(50);
+    text('Level: ' + nf(this.level), WIDTH * 0.02, HEIGHT * 0.08);
+};
+
 ParticleSystem.prototype.addParticles = function () {
     for (let i = 0; i < this.numberOfParticles; i++) {
         this.particles.push(new Particle(this.origin, this.initialRadius));
@@ -15,15 +39,6 @@ ParticleSystem.prototype.addParticles = function () {
 
     this.numberOfParticles = 0;
 };
-
-ParticleSystem.prototype.resetParticles = function () {
-    this.incrementParticles += Math.round(this.incrementParticles / 2);
-    this.numberOfParticles = this.incrementParticles;
-}
-
-ParticleSystem.prototype.getParticles = function () {
-    return this.particles;
-}
 
 ParticleSystem.prototype.run = function () {
     for (let i = this.particles.length - 1; i >= 0; i--) {
@@ -42,20 +57,6 @@ ParticleSystem.prototype.run = function () {
     }
 };
 
-ParticleSystem.prototype.doubleUp = function (particle) {
-
-    if (particle.radius <= 30) {
-        return;
-    }
-
-    for (let i = 0; i < 2; i++) {
-        this.particles.push(new Particle(particle.position, particle.radius / 1.5));
-    }
-};
-
-ParticleSystem.prototype.printLevel = function () {
-    noStroke();
-    fill(255);
-    textSize(50);
-    text('Level: ' + nf(this.level), WIDTH * 0.02, HEIGHT * 0.08);
+ParticleSystem.prototype.getParticles = function () {
+    return this.particles;
 };
