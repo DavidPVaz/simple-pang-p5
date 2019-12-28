@@ -1,3 +1,5 @@
+import Collidable from '../collidable.js';
+
 let Bullet = function (position, radius) {
     Collidable.call(this, position, radius);
 
@@ -28,3 +30,5 @@ Bullet.prototype.run = function() {
     this.show();
     this.move();
 }
+
+export default Bullet;

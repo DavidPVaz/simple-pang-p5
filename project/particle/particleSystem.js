@@ -1,3 +1,7 @@
+import Particle from './particle.js';
+import constants from '../constants.js';
+
+const { WIDTH, HEIGHT } = constants;
 
 let ParticleSystem = function (position) {
     this.origin = position.copy();
@@ -60,3 +64,5 @@ ParticleSystem.prototype.run = function () {
 ParticleSystem.prototype.getParticles = function () {
     return this.particles;
 };
+
+export default ParticleSystem;

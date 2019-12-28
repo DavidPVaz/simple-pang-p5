@@ -1,4 +1,7 @@
-// A simple Particle class
+import constants from '../constants.js';
+
+const { WIDTH, HEIGHT } = constants;
+
 let Particle = function (position, radius) {
     this.acceleration = createVector(0, 0.1);
     this.velocity = createVector(random(-3, 3), random(-2.5, 0));
@@ -57,3 +60,5 @@ Particle.prototype.run = function () {
 Particle.prototype.isDead = function() {
     return this.isDead;
 };
+
+export default Particle;

@@ -1,3 +1,5 @@
+import Bullet from './bullet.js';
+
 let BulletSystem = function () {
     this.bullets = [];
 };
@@ -29,3 +31,5 @@ BulletSystem.prototype.run = function (particles) {
     }
 
 };
+
+export default BulletSystem;

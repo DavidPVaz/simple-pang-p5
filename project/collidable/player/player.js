@@ -1,3 +1,9 @@
+import Collidable from '../collidable.js';
+import BulletSystem from '../bullet/bulletSystem.js';
+import constants from '../../constants.js';
+
+const { WIDTH, HEIGHT } = constants;
+
 let Player = function (position, radius) {
     Collidable.call(this, position, radius);
 
@@ -85,3 +91,5 @@ Player.prototype.move = function () {
     this.fall();
     this.checkEdges();
 };
+
+export default Player;
