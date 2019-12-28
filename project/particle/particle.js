@@ -10,27 +10,21 @@ let Particle = function (position, radius) {
     this.radius = radius;
 };
 
-
-//internals
-
-// Method to update position
 Particle.prototype.move = function () {
     this.velocity.add(this.acceleration);
     this.position.add(this.velocity);
 };
 
-// Method to display
 Particle.prototype.show = function () {
     stroke(500);
-    strokeWeight(5); // ellipes borders
-    fill(239, 147, 9); // RGB
+    strokeWeight(5); 
+    fill(239, 147, 9); 
     ellipseMode(CENTER);
     ellipse(this.position.x, this.position.y, this.radius * 2, this.radius * 2);
 };
 
 Particle.prototype.checkEdges = function () {
     if (this.position.y > (HEIGHT - this.radius)) {
-        // A little dampening when hitting the bottom
         this.position.y = (HEIGHT - this.radius);
         this.velocity.y *= -1;
     }
@@ -50,7 +44,6 @@ Particle.prototype.die = function () {
     this.isDead = true;
 };
 
-//externals
 Particle.prototype.run = function () {
     this.show();
     this.move();

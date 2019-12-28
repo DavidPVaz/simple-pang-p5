@@ -28,7 +28,6 @@ ParticleSystem.prototype.doubleUp = function (particle) {
     }
 };
 
-//externals
 ParticleSystem.prototype.printLevel = function () {
     noStroke();
     fill(255);

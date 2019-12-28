@@ -4,8 +4,6 @@ let BulletSystem = function () {
     this.bullets = [];
 };
 
-
-//externals
 BulletSystem.prototype.load = function (position, radius) {
     this.bullets.push(new Bullet(position, radius));
 };

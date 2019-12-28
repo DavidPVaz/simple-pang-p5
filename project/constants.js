@@ -1,7 +1,6 @@
 export default {
     rightIsBeingPressed : false, 
     leftIsBeingPressed : false, 
-    upIsBeingPressed : false,
     WIDTH : 1665,
     HEIGHT : 860,
     SPACE : 32,

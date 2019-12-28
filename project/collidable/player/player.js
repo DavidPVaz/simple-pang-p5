@@ -18,27 +18,23 @@ let Player = function (position, radius) {
 Player.prototype = Object.create(Collidable.prototype);
 Player.prototype.constructor = Player;
 
-//internals
-
 Player.prototype.fall = function () {
     this.velocity.y += this.gravity;
     this.position.y += this.velocity.y;
 }
 
 Player.prototype.checkEdges = function () {
-
     if (this.position.y > HEIGHT) {
         this.position.y = HEIGHT;
         this.velocity.y = 0;
     } else if (this.position.y < 0) {
         this.position.y = 0;
-        this.velocity.y *= -0.5;
+        this.velocity.y *= 0.5;
     } else if (this.position.x - this.radius < 0) {
         this.position.x = 0 + this.radius;
     } else if (this.position.x + this.radius > WIDTH) {
         this.position.x = WIDTH - this.radius;
     }
-
 };
 
 Player.prototype.checkCollision = function (particles) {
@@ -63,8 +59,6 @@ Player.prototype.show = function () {
     ellipse(this.position.x, this.position.y - this.radius, this.radius * 2, this.radius * 2);
 };
 
-
-//externals
 Player.prototype.setDirection = function (direction) {
     this.direction = direction;
 };
@@ -80,10 +74,9 @@ Player.prototype.loadBullet = function () {
     this.bullets.load(createVector(this.position.x, this.position.y - this.radius * 2), this.radius / 2);
 };
 
-Player.prototype.start = function (particles) {
-    this.checkCollision(particles);// needs to be invoked by game
+Player.prototype.run = function (particles) {
+    this.checkCollision(particles);
     this.shoot(particles);
-    this.show();
 };
 
 Player.prototype.move = function () {
