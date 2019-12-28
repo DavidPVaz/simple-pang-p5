@@ -27,7 +27,6 @@ BulletSystem.prototype.run = function (particles) {
             this.bullets.splice(i, 1);
         }
     }
-
 };
 
 export default BulletSystem;
