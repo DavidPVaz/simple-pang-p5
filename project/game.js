@@ -22,7 +22,7 @@ function draw() {
     player.show();
     player.move();
     player.run(particleSystem.getParticles());
-    player.setDirection(leftIsBeingPressed ? -1 : rightIsBeingPressed ? 1 : 0);
+    player.setDirection(leftIsBeingPressed && !rightIsBeingPressed ? -1 : rightIsBeingPressed && !leftIsBeingPressed ? 1 : 0);
 }
 
 function keyPressed() {
