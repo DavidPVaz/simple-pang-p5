@@ -10,23 +10,21 @@ BulletSystem.prototype.load = function (position, radius) {
 
 BulletSystem.prototype.run = function (particles) {
 
-    for (let i = this.bullets.length - 1; i >= 0; i--) {
-
-        let bullet = this.bullets[i];
+    this.bullets.forEach((bullet, index) => {
 
         bullet.run();
 
-        for (let j = 0; j < particles.length; j++) {
-            if (bullet.hits(particles[j])) {
-                this.bullets.splice(i, 1);
-                particles[j].die();
+        for (let particle of particles) {
+            if (bullet.hits(particle)) {
+                this.bullets.splice(index, 1);
+                particle.die();
             }
         }
 
-        if (bullet.goOutOfBounds()) {
-            this.bullets.splice(i, 1);
-        }
-    }
+        this.bullets = this.bullets.filter(function(bullet) {
+            return !bullet.goOutOfBounds();
+        });
+    });
 };
 
 export default BulletSystem;
