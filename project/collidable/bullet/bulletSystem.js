@@ -1,14 +1,14 @@
 import Bullet from './bullet.js';
 
-let BulletSystem = function () {
+let BulletSystem = function() {
     this.bullets = [];
 };
 
-BulletSystem.prototype.load = function (position, radius) {
+BulletSystem.prototype.load = function(position, radius) {
     this.bullets.push(new Bullet(position, radius));
 };
 
-BulletSystem.prototype.run = function (particles) {
+BulletSystem.prototype.run = function(particles) {
 
     this.bullets.forEach((bullet, index) => {
 

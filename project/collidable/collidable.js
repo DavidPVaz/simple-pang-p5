@@ -1,4 +1,4 @@
-let Collidable = function (position, radius) {
+let Collidable = function(position, radius) {
     this.position = position.copy();
     this.radius = radius;
 };
