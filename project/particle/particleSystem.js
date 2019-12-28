@@ -19,7 +19,7 @@ ParticleSystem.prototype.resetParticles = function () {
 
 ParticleSystem.prototype.doubleUp = function (particle) {
 
-    if (particle.radius <= 30) {
+    if (particle.getRadius() <= 30) {
         return;
     }
 
@@ -44,15 +44,16 @@ ParticleSystem.prototype.addParticles = function () {
 };
 
 ParticleSystem.prototype.run = function () {
-    for (let i = this.particles.length - 1; i >= 0; i--) {
-        let particle = this.particles[i];
+
+    this.particles.forEach((particle, index) => {
+
         particle.run();
 
-        if (particle.isDead) {
+        if (particle.isDead()) {
             this.doubleUp(particle);
-            this.particles.splice(i, 1);
+            this.particles.splice(index, 1);
         }
-    }
+    });
 
     if (this.particles.length === 0) {
         this.resetParticles();

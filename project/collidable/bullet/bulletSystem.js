@@ -20,11 +20,11 @@ BulletSystem.prototype.run = function (particles) {
                 particle.die();
             }
         }
-
-        this.bullets = this.bullets.filter(function(bullet) {
-            return !bullet.goOutOfBounds();
-        });
     });
+
+    this.bullets = this.bullets.filter(function(bullet) {
+        return !bullet.goOutOfBounds();
+    });    
 };
 
 export default BulletSystem;

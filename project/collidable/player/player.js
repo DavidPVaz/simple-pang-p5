@@ -24,6 +24,7 @@ Player.prototype.fall = function () {
 }
 
 Player.prototype.checkEdges = function () {
+    
     if (this.position.y > HEIGHT) {
         this.position.y = HEIGHT;
         this.velocity.y = 0;
@@ -31,7 +32,7 @@ Player.prototype.checkEdges = function () {
 
     if (this.position.x - this.radius < 0) {
         this.position.x = 0 + this.radius;
-    } 
+    }
 
     if (this.position.x + this.radius > WIDTH) {
         this.position.x = WIDTH - this.radius;
@@ -40,9 +41,7 @@ Player.prototype.checkEdges = function () {
 
 Player.prototype.checkCollision = function (particles) {
 
-    for (let i = 0; i < particles.length; i++) {
-        let particle = particles[i];
-
+    for (let particle of particles) {
         if (this.hits(particle)) {
             noLoop();
         }
@@ -65,6 +64,7 @@ Player.prototype.setDirection = function (direction) {
 };
 
 Player.prototype.jump = function () {
+
     if (this.velocity.y === 0) {
         this.velocity.y -= this.upForce;
         this.velocity.x += this.direction;

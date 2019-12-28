@@ -2,28 +2,29 @@ import constants from '../constants.js';
 
 const { WIDTH, HEIGHT } = constants;
 
-let Particle = function (position, radius) {
+let Particle = function(position, radius) {
     this.acceleration = createVector(0, 0.1);
     this.velocity = createVector(random(-3, 3), random(-2.5, 0));
     this.position = position.copy();
-    this.isDead = false;
+    this.dead = false;
     this.radius = radius;
 };
 
-Particle.prototype.move = function () {
+Particle.prototype.move = function() {
     this.velocity.add(this.acceleration);
     this.position.add(this.velocity);
 };
 
-Particle.prototype.show = function () {
+Particle.prototype.show = function() {
     stroke(500);
-    strokeWeight(5); 
-    fill(239, 147, 9); 
+    strokeWeight(5);
+    fill(239, 147, 9);
     ellipseMode(CENTER);
     ellipse(this.position.x, this.position.y, this.radius * 2, this.radius * 2);
 };
 
-Particle.prototype.checkEdges = function () {
+Particle.prototype.checkEdges = function() {
+
     if (this.position.y > (HEIGHT - this.radius)) {
         this.position.y = (HEIGHT - this.radius);
         this.velocity.y *= -1;
@@ -40,18 +41,22 @@ Particle.prototype.checkEdges = function () {
     }
 };
 
-Particle.prototype.die = function () {
-    this.isDead = true;
+Particle.prototype.die = function() {
+    this.dead = true;
 };
 
-Particle.prototype.run = function () {
+Particle.prototype.run = function() {
     this.show();
     this.move();
     this.checkEdges();
 };
 
 Particle.prototype.isDead = function() {
-    return this.isDead;
+    return this.dead;
+};
+
+Particle.prototype.getRadius = function() {
+    return this.radius;
 };
 
 export default Particle;
