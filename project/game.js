@@ -1,37 +1,29 @@
-let system;
+import ParticleSystem from './particle/particleSystem.js';
+import Player from './collidable/player/player.js';
+import constants from './constants.js';
+
+let particleSystem;
 let player;
-let rightIsBeingPressed = false;
-let leftIsBeingPressed = false;
-let upIsBeingPressed = false;
-const WIDTH = 1665;
-const HEIGHT = 860;
-const SPACE = 32;
-const PLAYER_STARTING_X = WIDTH / 2;
-const PLAYER_STARTING_Y = HEIGHT;
-const PLAYER_STARTING_RADIUS = 20;
-const SYSTEM_STARTING_X = WIDTH / 2;
-const SYSTEM_STARTING_Y = HEIGHT / 6;
+let { rightIsBeingPressed, leftIsBeingPressed, upIsBeingPressed } = constants;
+const { WIDTH, HEIGHT, SYSTEM_STARTING_X, SYSTEM_STARTING_Y, PLAYER_STARTING_X, PLAYER_STARTING_Y, PLAYER_STARTING_RADIUS, SPACE } = constants;
 
 function setup() {
     createCanvas(WIDTH, HEIGHT);//(1665, 860);
-    system = new ParticleSystem(createVector(SYSTEM_STARTING_X, SYSTEM_STARTING_Y));
+    particleSystem = new ParticleSystem(createVector(SYSTEM_STARTING_X, SYSTEM_STARTING_Y));
     player = new Player(createVector(PLAYER_STARTING_X, PLAYER_STARTING_Y), PLAYER_STARTING_RADIUS);
 }
 
 function draw() {
-
     background(54, 49, 53);
-    system.addParticles();
-    system.run();
-    system.printLevel();
+    particleSystem.addParticles();
+    particleSystem.run();
+    particleSystem.printLevel();
 
-    player.start(system.getParticles());
-    player.move(system.getParticles());
-
+    player.start(particleSystem.getParticles());
+    player.move(particleSystem.getParticles());
 }
 
 function keyPressed() {
-
     switch (keyCode) {
         case LEFT_ARROW:
             player.setDirection(-1);
@@ -52,7 +44,6 @@ function keyPressed() {
 }
 
 function keyReleased() {
-
     if (keyCode !== SPACE && !upIsBeingPressed && !rightIsBeingPressed || keyCode !== SPACE && !upIsBeingPressed && !leftIsBeingPressed) {
         player.setDirection(0);
     }
@@ -68,5 +59,10 @@ function keyReleased() {
             upIsBeingPressed = false;
             break;
     }
-
 }
+
+window.setup = setup;
+window.draw = draw;
+window.keyPressed = keyPressed;
+window.keyReleased = keyReleased;
+
