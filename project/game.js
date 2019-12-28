@@ -2,9 +2,8 @@ import ParticleSystem from './particle/particleSystem.js';
 import Player from './collidable/player/player.js';
 import constants from './constants.js';
 
-let particleSystem;
-let player;
-let { rightIsBeingPressed, leftIsBeingPressed } = constants;
+let particleSystem, player;
+let rightIsBeingPressed, leftIsBeingPressed = false;
 const { WIDTH, HEIGHT, SYSTEM_STARTING_X, SYSTEM_STARTING_Y, PLAYER_STARTING_X, PLAYER_STARTING_Y, PLAYER_STARTING_RADIUS, SPACE } = constants;
 
 function setup() {
