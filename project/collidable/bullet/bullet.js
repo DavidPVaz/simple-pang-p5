@@ -1,31 +1,44 @@
 import Collidable from '../collidable.js';
 
-let Bullet = function(position, radius) {
-    Collidable.call(this, position, radius);
+let Bullet = (function() {
 
-    this.speed = 5;
-};
+    let privateMethodsMap = new WeakMap();
 
-Bullet.prototype = Object.create(Collidable.prototype);
-Bullet.prototype.constructor = Bullet;
+    let Bullet = function(position, radius) {
+        Collidable.call(this, position, radius);
 
-Bullet.prototype.show = function() {
-    noStroke();
-    fill(247, 67, 12);
-    ellipse(this.position.x, this.position.y, this.radius * 2, this.radius * 2);
-};
+        this.speed = 5;
 
-Bullet.prototype.move = function() {
-    this.position.y -= this.speed;
-};
+        let show = () => {
+            noStroke();
+            fill(247, 67, 12);
+            ellipse(this.position.x, this.position.y, this.radius * 2, this.radius * 2);
+        };
 
-Bullet.prototype.goOutOfBounds = function() {
-    return this.position.y <= 0;
-};
+        let move = () => {
+            this.position.y -= this.speed;
+        };
 
-Bullet.prototype.run = function() {
-    this.show();
-    this.move();
-};
+        privateMethodsMap.set(this, {
+            show,
+            move
+        })
+    };
+
+    Bullet.prototype = Object.create(Collidable.prototype);
+    Bullet.prototype.constructor = Bullet;
+
+    Bullet.prototype.run = function() {
+        privateMethodsMap.get(this).show();
+        privateMethodsMap.get(this).move();
+    };
+
+    Bullet.prototype.goOutOfBounds = function() {
+        return this.position.y <= 0;
+    };
+
+    return Bullet;
+
+})();
 
 export default Bullet;

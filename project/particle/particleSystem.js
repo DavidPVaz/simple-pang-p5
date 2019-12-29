@@ -3,11 +3,11 @@ import constants from '../constants.js';
 
 const { WIDTH, HEIGHT } = constants;
 
-let ParticleSystem = (function () {
+let ParticleSystem = (function() {
 
     let privateMethodsMap = new WeakMap();
 
-    let ParticleSystem = function (position) {
+    let ParticleSystem = function(position) {
         this.origin = position.copy();
         this.particles = [];
         this.numberOfParticles = 2;
