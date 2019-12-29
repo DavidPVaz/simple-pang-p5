@@ -22,7 +22,7 @@ let Bullet = (function() {
         privateMethodsMap.set(this, {
             show,
             move
-        })
+        });
     };
 
     Bullet.prototype = Object.create(Collidable.prototype);

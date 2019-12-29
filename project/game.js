@@ -10,6 +10,7 @@ function setup() {
     createCanvas(WIDTH, HEIGHT);
     particleSystem = new ParticleSystem(createVector(SYSTEM_STARTING_X, SYSTEM_STARTING_Y));
     player = new Player(createVector(PLAYER_STARTING_X, PLAYER_STARTING_Y), PLAYER_STARTING_RADIUS);
+    console.log(player);
 }
 
 function draw() {
