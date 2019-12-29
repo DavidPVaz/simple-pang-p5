@@ -3,67 +3,80 @@ import constants from '../constants.js';
 
 const { WIDTH, HEIGHT } = constants;
 
-let ParticleSystem = function(position) {
-    this.origin = position.copy();
-    this.particles = [];
-    this.numberOfParticles = 2;
-    this.incrementParticles = 2;
-    this.initialRadius = 80;
-    this.level = 1;
-};
+let ParticleSystem = (function () {
 
-ParticleSystem.prototype.resetParticles = function() {
-    this.incrementParticles += Math.round(this.incrementParticles / 2);
-    this.numberOfParticles = this.incrementParticles;
-};
+    let privateMethodsMap = new WeakMap();
 
-ParticleSystem.prototype.doubleUp = function(particle) {
+    let ParticleSystem = function (position) {
+        this.origin = position.copy();
+        this.particles = [];
+        this.numberOfParticles = 2;
+        this.incrementParticles = 2;
+        this.initialRadius = 80;
+        this.level = 1;
 
-    if (particle.getRadius() <= 30) {
-        return;
-    }
+        let resetParticles = () => {
+            this.incrementParticles += Math.round(this.incrementParticles / 2);
+            this.numberOfParticles = this.incrementParticles;
+        };
 
-    for (let i = 0; i < 2; i++) {
-        this.particles.push(new Particle(particle.position, particle.radius / 1.5));
-    }
-};
+        let doubleUp = particle => {
 
-ParticleSystem.prototype.printLevel = function() {
-    noStroke();
-    fill(255);
-    textSize(50);
-    text('Level: ' + nf(this.level), WIDTH * 0.02, HEIGHT * 0.08);
-};
+            if (particle.getRadius() <= 30) {
+                return;
+            }
 
-ParticleSystem.prototype.addParticles = function() {
+            for (let i = 0; i < 2; i++) {
+                this.particles.push(new Particle(particle.position, particle.radius / 1.5));
+            }
+        };
 
-    for (let i = 0; i < this.numberOfParticles; i++) {
-        this.particles.push(new Particle(this.origin, this.initialRadius));
-    }
+        privateMethodsMap.set(this, {
+            resetParticles,
+            doubleUp
+        });
+    };
 
-    this.numberOfParticles = 0;
-};
+    ParticleSystem.prototype.run = function() {
 
-ParticleSystem.prototype.run = function() {
+        this.particles.forEach((particle, index) => {
 
-    this.particles.forEach((particle, index) => {
+            particle.run();
 
-        particle.run();
+            if (particle.isDead()) {
+                privateMethodsMap.get(this).doubleUp(particle);
+                this.particles.splice(index, 1);
+            }
+        });
 
-        if (particle.isDead()) {
-            this.doubleUp(particle);
-            this.particles.splice(index, 1);
+        if (this.particles.length === 0) {
+            privateMethodsMap.get(this).resetParticles();
+            this.level++;
         }
-    });
+    };
 
-    if (this.particles.length === 0) {
-        this.resetParticles();
-        this.level++;
-    }
-};
+    ParticleSystem.prototype.printLevel = function() {
+        noStroke();
+        fill(255);
+        textSize(50);
+        text('Level: ' + nf(this.level), WIDTH * 0.02, HEIGHT * 0.08);
+    };
 
-ParticleSystem.prototype.getParticles = function() {
-    return this.particles;
-};
+    ParticleSystem.prototype.addParticles = function() {
+
+        for (let i = 0; i < this.numberOfParticles; i++) {
+            this.particles.push(new Particle(this.origin, this.initialRadius));
+        }
+
+        this.numberOfParticles = 0;
+    };
+
+    ParticleSystem.prototype.getParticles = function() {
+        return this.particles;
+    };
+
+    return ParticleSystem;
+
+})();
 
 export default ParticleSystem;
