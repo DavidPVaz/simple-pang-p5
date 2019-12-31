@@ -1,6 +1,6 @@
 import Bullet from './bullet.js';
 
-let BulletSystem = function() {
+const BulletSystem = function() {
     this.bullets = [];
 };
 

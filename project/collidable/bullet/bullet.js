@@ -1,21 +1,21 @@
 import Collidable from '../collidable.js';
 
-let Bullet = (function() {
+const Bullet = (function() {
 
-    let privateMethodsMap = new WeakMap();
+    const privateMethodsMap = new WeakMap();
 
     let Bullet = function(position, radius) {
         Collidable.call(this, position, radius);
 
         this.speed = 5;
 
-        let show = () => {
+        const show = () => {
             noStroke();
             fill(247, 67, 12);
             ellipse(this.position.x, this.position.y, this.radius * 2, this.radius * 2);
         };
 
-        let move = () => {
+        const move = () => {
             this.position.y -= this.speed;
         };
 

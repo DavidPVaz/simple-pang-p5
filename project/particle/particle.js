@@ -2,23 +2,23 @@ import constants from '../constants.js';
 
 const { WIDTH, HEIGHT } = constants;
 
-let Particle = (function() {
+const Particle = (function() {
 
-    let privateMethodsMap = new WeakMap();
+    const privateMethodsMap = new WeakMap();
 
-    let Particle = function(position, radius) {
+    const Particle = function(position, radius) {
         this.acceleration = createVector(0, 0.1);
         this.velocity = createVector(random(-3, 3), random(-2.5, 0));
         this.position = position.copy();
         this.dead = false;
         this.radius = radius;
 
-        let move = () => {
+        const move = () => {
             this.velocity.add(this.acceleration);
             this.position.add(this.velocity);
         };
 
-        let show = () => {
+        const show = () => {
             stroke(500);
             strokeWeight(5);
             fill(239, 147, 9);
@@ -26,7 +26,7 @@ let Particle = (function() {
             ellipse(this.position.x, this.position.y, this.radius * 2, this.radius * 2);
         };
 
-        let checkEdges = () => {
+        const checkEdges = () => {
 
             if (this.position.y > (HEIGHT - this.radius)) {
                 this.position.y = (HEIGHT - this.radius);

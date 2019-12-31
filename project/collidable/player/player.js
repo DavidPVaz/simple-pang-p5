@@ -4,11 +4,11 @@ import constants from '../../constants.js';
 
 const { WIDTH, HEIGHT } = constants;
 
-let Player = (function() {
+const Player = (function() {
 
-    let privateMethodsMap = new WeakMap();
+    const privateMethodsMap = new WeakMap();
 
-    let Player = function(position, radius) {
+    const Player = function(position, radius) {
         Collidable.call(this, position, radius);
 
         this.gravity = 4;
@@ -18,12 +18,12 @@ let Player = (function() {
         this.isDead = false;
         this.bullets = new BulletSystem();
 
-        let fall = () => {
+        const fall = () => {
             this.velocity.y += this.gravity;
             this.position.y += this.velocity.y;
         };
 
-        let checkEdges = () => {
+        const checkEdges = () => {
 
             if (this.position.y > HEIGHT) {
                 this.position.y = HEIGHT;
@@ -39,7 +39,7 @@ let Player = (function() {
             }
         };
 
-        let checkCollision = particles => {
+        const checkCollision = particles => {
 
             for (let particle of particles) {
                 if (this.hits(particle)) {
@@ -48,7 +48,7 @@ let Player = (function() {
             }
         };
 
-        let shoot = particles => {
+        const shoot = particles => {
             this.bullets.run(particles);
         };
 

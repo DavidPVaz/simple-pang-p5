@@ -3,11 +3,11 @@ import constants from '../constants.js';
 
 const { WIDTH, HEIGHT } = constants;
 
-let ParticleSystem = (function() {
+const ParticleSystem = (function() {
 
-    let privateMethodsMap = new WeakMap();
+    const privateMethodsMap = new WeakMap();
 
-    let ParticleSystem = function(position) {
+    const ParticleSystem = function(position) {
         this.origin = position.copy();
         this.particles = [];
         this.numberOfParticles = 2;
@@ -15,12 +15,12 @@ let ParticleSystem = (function() {
         this.initialRadius = 80;
         this.level = 1;
 
-        let resetParticles = () => {
+        const resetParticles = () => {
             this.incrementParticles += Math.round(this.incrementParticles / 2);
             this.numberOfParticles = this.incrementParticles;
         };
 
-        let doubleUp = particle => {
+        const doubleUp = particle => {
 
             if (particle.getRadius() <= 30) {
                 return;
