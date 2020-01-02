@@ -44,6 +44,8 @@ const Player = (function() {
             for (let particle of particles) {
                 if (this.hits(particle)) {
                     noLoop();
+                    textSize(100);
+                    text('Game Over', WIDTH * 0.35, HEIGHT * 0.4);
                     setTimeout(function(){
                         window.sessionStorage.removeItem("readyToRunGame");
                         window.location.reload(true); 
