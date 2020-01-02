@@ -18,7 +18,7 @@ window.onload = function() {
     window.sessionStorage.readyToRunGame ? clearButton() : addButton();
 
     function addButton() {
-        var btn = document.createElement("BUTTON");
+        let btn = document.createElement("BUTTON");
         btn.setAttribute("id", "play");
         btn.innerHTML = "PLAY";
         document.body.appendChild(btn);
@@ -27,11 +27,10 @@ window.onload = function() {
             window.sessionStorage.setItem("readyToRunGame", true);
             window.location.reload(true);
         });
-
     }
 
     function clearButton() {
-        var btn = document.querySelector("#play");
+        let btn = document.querySelector("#play");
         btn.parentNode.removeChild(btn);
     }
 };
