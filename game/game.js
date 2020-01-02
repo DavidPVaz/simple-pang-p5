@@ -18,7 +18,7 @@ export default (function() {
         background(54, 49, 53);
         particleSystem.addParticles();
         particleSystem.run();
-        particleSystem.printLevel();
+        printLevel();
 
         player.show();
         player.move();
@@ -60,5 +60,12 @@ export default (function() {
         keyPressed,
         keyReleased
     };
+
+    function printLevel() {
+        noStroke();
+        fill(255);
+        textSize(50);
+        text('Level: ' + nf(particleSystem.getLevel()), WIDTH * 0.02, HEIGHT * 0.08);
+    }
 
 })();

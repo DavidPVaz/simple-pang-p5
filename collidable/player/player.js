@@ -93,7 +93,7 @@ const Player = (function() {
 
     Player.prototype.jump = function() {
 
-        if (this.velocity.y === 0) {
+        if (this.position.y === HEIGHT) {
             this.velocity.y -= this.upForce;
             this.velocity.x += this.direction;
         }

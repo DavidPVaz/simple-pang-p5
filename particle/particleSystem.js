@@ -1,7 +1,4 @@
 import Particle from './particle.js';
-import constants from '../game/constants.js';
-
-const { WIDTH, HEIGHT } = constants;
 
 const ParticleSystem = (function() {
 
@@ -55,13 +52,6 @@ const ParticleSystem = (function() {
         }
     };
 
-    ParticleSystem.prototype.printLevel = function() {
-        noStroke();
-        fill(255);
-        textSize(50);
-        text('Level: ' + nf(this.level), WIDTH * 0.02, HEIGHT * 0.08);
-    };
-
     ParticleSystem.prototype.addParticles = function() {
 
         for (let i = 0; i < this.numberOfParticles; i++) {
@@ -73,6 +63,10 @@ const ParticleSystem = (function() {
 
     ParticleSystem.prototype.getParticles = function() {
         return this.particles;
+    };
+
+    ParticleSystem.prototype.getLevel = function() {
+        return this.level;
     };
 
     return ParticleSystem;
