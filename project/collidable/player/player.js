@@ -1,6 +1,6 @@
 import Collidable from '../collidable.js';
 import BulletSystem from '../bullet/bulletSystem.js';
-import constants from '../../constants.js';
+import constants from '../../game/constants.js';
 
 const { WIDTH, HEIGHT } = constants;
 

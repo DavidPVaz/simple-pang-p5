@@ -1,4 +1,4 @@
-import constants from '../constants.js';
+import constants from '../game/constants.js';
 
 const { WIDTH, HEIGHT } = constants;
 

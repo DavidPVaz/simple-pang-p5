@@ -1,5 +1,5 @@
 let width = Math.min(window.screen.availWidth, window.innerWidth);
-let height = Math.min(window.screen.availHeight, window.innerHeight)
+let height = Math.min(window.screen.availHeight, window.innerHeight);
 
 export default {
     WIDTH : width,
