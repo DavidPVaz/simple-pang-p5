@@ -7,4 +7,4 @@ Both ES6 and ES5 features are used.
 
 #### **To play the game**:
 
-- Clone the project and start a simple http-server(npm) in project folder.
+- https://davidpvaz.github.io/simple-pang-p5/
