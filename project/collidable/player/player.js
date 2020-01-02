@@ -44,6 +44,10 @@ const Player = (function() {
             for (let particle of particles) {
                 if (this.hits(particle)) {
                     noLoop();
+                    setTimeout(function(){
+                        window.sessionStorage.removeItem("readyToRunGame");
+                        window.location.reload(true); 
+                    }, 2000);
                 }
             }
         };
