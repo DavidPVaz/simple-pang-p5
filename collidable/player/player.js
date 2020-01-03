@@ -18,6 +18,17 @@ const Player = (function() {
         this.isDead = false;
         this.bullets = new BulletSystem();
 
+        const show = () => {
+            noStroke();
+            fill(54, 202, 239);
+            ellipseMode(CENTER);
+            ellipse(this.position.x, this.position.y - this.radius, this.radius * 2, this.radius * 2);
+        };
+
+        const move = () => {
+            this.position.x += this.direction * this.velocity.x;
+        };
+
         const fall = () => {
             this.velocity.y += this.gravity;
             this.position.y += this.velocity.y;
@@ -39,52 +50,26 @@ const Player = (function() {
             }
         };
 
-        const checkCollision = particles => {
-
-            for (let particle of particles) {
-                if (this.hits(particle)) {
-                    noLoop();
-                    textSize(100);
-                    text('Game Over', WIDTH * 0.35, HEIGHT * 0.4);
-                    setTimeout(function(){
-                        window.sessionStorage.removeItem("readyToRunGame");
-                        window.location.reload(true); 
-                    }, 2000);
-                }
-            }
-        };
-
-        const shoot = particles => {
-            this.bullets.run(particles);
-        };
-
         privateMethodsMap.set(this, {
+            show,
+            move,
             fall,
-            checkEdges,
-            checkCollision,
-            shoot
+            checkEdges
         });
     };
 
     Player.prototype = Object.create(Collidable.prototype);
     Player.prototype.constructor = Player;
 
-    Player.prototype.run = function(particles) {
-        privateMethodsMap.get(this).checkCollision(particles);
-        privateMethodsMap.get(this).shoot(particles);
-    };
-
-    Player.prototype.move = function() {
-        this.position.x += this.direction * this.velocity.x;
+    Player.prototype.run = function() {
+        privateMethodsMap.get(this).show();
+        privateMethodsMap.get(this).move();
         privateMethodsMap.get(this).fall();
         privateMethodsMap.get(this).checkEdges();
     };
 
-    Player.prototype.show = function() {
-        noStroke();
-        fill(54, 202, 239);
-        ellipseMode(CENTER);
-        ellipse(this.position.x, this.position.y - this.radius, this.radius * 2, this.radius * 2);
+    Player.prototype.shoot = function(particles) {
+        this.bullets.run(particles);
     };
 
     Player.prototype.setDirection = function(direction) {

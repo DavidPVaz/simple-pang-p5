@@ -16,13 +16,12 @@ export default (function() {
 
     const draw = function() {
         background(54, 49, 53);
-        particleSystem.addParticles();
-        particleSystem.run();
+        run();
         printLevel();
+        checkCollision();
 
-        player.show();
-        player.move();
-        player.run(particleSystem.getParticles());
+        player.run();
+        player.shoot(particleSystem.getParticles());
         player.setDirection(leftIsBeingPressed && !rightIsBeingPressed ? -1 : rightIsBeingPressed && !leftIsBeingPressed ? 1 : 0);
     }
 
@@ -54,18 +53,40 @@ export default (function() {
         }
     }
 
+    const run = function() {
+        particleSystem.addParticles();
+        particleSystem.run();
+    };
+
+    const printLevel = function() {
+        noStroke();
+        fill(255);
+        textSize(50);
+        text('Level: ' + nf(particleSystem.getLevel()), WIDTH * 0.02, HEIGHT * 0.08);
+    };
+
+    const checkCollision = function() {
+
+        let particles = particleSystem.getParticles();
+
+        for (let particle of particles) {
+            if (player.hits(particle)) {
+                noLoop();
+                textSize(100);
+                text('Game Over', WIDTH * 0.35, HEIGHT * 0.4);
+                setTimeout(function(){
+                    window.sessionStorage.removeItem("readyToRunGame");
+                    window.location.reload(true); 
+                }, 2000);
+            }
+        }
+    };
+
     return {
         setup,
         draw,
         keyPressed,
         keyReleased
     };
-
-    function printLevel() {
-        noStroke();
-        fill(255);
-        textSize(50);
-        text('Level: ' + nf(particleSystem.getLevel()), WIDTH * 0.02, HEIGHT * 0.08);
-    }
 
 })();
