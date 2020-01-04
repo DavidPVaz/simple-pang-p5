@@ -2,14 +2,8 @@ import Game from './game/game.js';
 
 document.onreadystatechange = function() {
 
-    window.sessionStorage.readyToRunGame ? setupWindowGame(Game.setup, Game.draw, Game.keyPressed, Game.keyReleased, Game.windowResized) : setupWindowGame();
-
-    function setupWindowGame(...args) {
-        window.setup = args[0] || null;
-        window.draw = args[1] || null;
-        window.keyPressed = args[2] || null;
-        window.keyReleased = args[3] || null;
-        window.windowResized = args[4] || null;
+    if (window.sessionStorage.readyToRunGame) {
+        Object.assign(window, Game);
     }
 };
 
