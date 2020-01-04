@@ -1,7 +1,3 @@
-import constants from '../game/constants.js';
-
-const { WIDTH, HEIGHT } = constants;
-
 const Particle = (function() {
 
     const privateMethodsMap = new WeakMap();
@@ -28,8 +24,11 @@ const Particle = (function() {
 
         const checkEdges = () => {
 
-            if (this.position.y > (HEIGHT - this.radius)) {
-                this.position.y = (HEIGHT - this.radius);
+            let width = window.innerWidth;
+            let height = window.innerHeight;
+
+            if (this.position.y > (height - this.radius)) {
+                this.position.y = (height - this.radius);
                 this.velocity.y *= -1;
             }
 
@@ -38,8 +37,8 @@ const Particle = (function() {
                 this.velocity.x *= -1;
             }
 
-            if (this.position.x > (WIDTH - this.radius)) {
-                this.position.x = (WIDTH - this.radius);
+            if (this.position.x > (width - this.radius)) {
+                this.position.x = (width - this.radius);
                 this.velocity.x *= -1;
             }
         };

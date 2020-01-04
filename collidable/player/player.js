@@ -1,8 +1,5 @@
 import Collidable from '../collidable.js';
 import BulletSystem from '../bullet/bulletSystem.js';
-import constants from '../../game/constants.js';
-
-const { WIDTH, HEIGHT } = constants;
 
 const Player = (function() {
 
@@ -36,8 +33,11 @@ const Player = (function() {
 
         const checkEdges = () => {
 
-            if (this.position.y > HEIGHT) {
-                this.position.y = HEIGHT;
+            let width = window.innerWidth;
+            let height = window.innerHeight;
+
+            if (this.position.y > height) {
+                this.position.y = height;
                 this.velocity.y = 0;
             }
 
@@ -45,8 +45,8 @@ const Player = (function() {
                 this.position.x = 0 + this.radius;
             }
 
-            if (this.position.x + this.radius > WIDTH) {
-                this.position.x = WIDTH - this.radius;
+            if (this.position.x + this.radius > width) {
+                this.position.x = width - this.radius;
             }
         };
 
@@ -78,7 +78,7 @@ const Player = (function() {
 
     Player.prototype.jump = function() {
 
-        if (this.position.y === HEIGHT) {
+        if (this.position.y === window.innerHeight) {
             this.velocity.y -= this.upForce;
             this.velocity.x += this.direction;
         }

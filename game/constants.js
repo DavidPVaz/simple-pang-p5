@@ -1,9 +1,7 @@
-let width = Math.min(window.screen.availWidth, window.innerWidth);
-let height = Math.min(window.screen.availHeight, window.innerHeight);
+const width = window.innerWidth;
+const height = window.innerHeight;
 
 export default {
-    WIDTH : width,
-    HEIGHT : height,
     SPACE : 32,
     PLAYER_STARTING_X : width / 2,
     PLAYER_STARTING_Y : height,

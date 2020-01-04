@@ -4,15 +4,15 @@ import constants from './constants.js';
 
 let particleSystem, player;
 let rightIsBeingPressed, leftIsBeingPressed = false;
-const { WIDTH, HEIGHT, SYSTEM_STARTING_X, SYSTEM_STARTING_Y, PLAYER_STARTING_X, PLAYER_STARTING_Y, PLAYER_STARTING_RADIUS, SPACE } = constants;
+const { SYSTEM_STARTING_X, SYSTEM_STARTING_Y, PLAYER_STARTING_X, PLAYER_STARTING_Y, PLAYER_STARTING_RADIUS, SPACE } = constants;
 
 export default (function() {
 
     const setup = function() {
-        createCanvas(WIDTH, HEIGHT);
+        createCanvas(window.innerWidth, window.innerHeight);
         particleSystem = new ParticleSystem(createVector(SYSTEM_STARTING_X, SYSTEM_STARTING_Y));
         player = new Player(createVector(PLAYER_STARTING_X, PLAYER_STARTING_Y), PLAYER_STARTING_RADIUS);
-    }
+    };
 
     const draw = function() {
         background(54, 49, 53);
@@ -23,7 +23,7 @@ export default (function() {
         player.run();
         player.shoot(particleSystem.getParticles());
         player.setDirection(leftIsBeingPressed && !rightIsBeingPressed ? -1 : rightIsBeingPressed && !leftIsBeingPressed ? 1 : 0);
-    }
+    };
 
     const keyPressed = function() {
         switch (keyCode) {
@@ -40,7 +40,7 @@ export default (function() {
                 player.jump();
                 break;
         }
-    }
+    };
 
     const keyReleased = function() {
         switch (keyCode) {
@@ -51,7 +51,11 @@ export default (function() {
                 rightIsBeingPressed = false;
                 break;
         }
-    }
+    };
+
+    const windowResized = function() {
+        resizeCanvas(window.innerWidth, window.innerHeight);
+    };
 
     const run = function() {
         particleSystem.addParticles();
@@ -62,7 +66,7 @@ export default (function() {
         noStroke();
         fill(255);
         textSize(50);
-        text('Level: ' + nf(particleSystem.getLevel()), WIDTH * 0.02, HEIGHT * 0.08);
+        text('Level: ' + nf(particleSystem.getLevel()), window.innerWidth * 0.02, window.innerHeight * 0.08);
     };
 
     const checkCollision = function() {
@@ -72,8 +76,8 @@ export default (function() {
         for (let particle of particles) {
             if (player.hits(particle)) {
                 noLoop();
-                textSize(100);
-                text('Game Over', WIDTH * 0.35, HEIGHT * 0.4);
+                textSize(window.innerWidth / 12);
+                text('Game Over', window.innerWidth * 0.3, window.innerHeight * 0.4);
                 setTimeout(function(){
                     window.sessionStorage.removeItem("readyToRunGame");
                     window.location.reload(true); 
@@ -86,7 +90,8 @@ export default (function() {
         setup,
         draw,
         keyPressed,
-        keyReleased
+        keyReleased,
+        windowResized
     };
 
 })();
