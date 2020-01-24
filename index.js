@@ -1,4 +1,5 @@
 import Game from './game/game.js';
+import { mobileAgents } from './game/constants.js';
 
 document.onreadystatechange = function() {
 
@@ -7,13 +8,22 @@ document.onreadystatechange = function() {
     }
 };
 
+window.onload = function() {
 
-window.onload = function () {
+    window.sessionStorage.readyToRunGame 
+        ? (async function() {
+            clearButton();
+            await lockOrientationInLandscape();
+        })()
 
-    window.sessionStorage.readyToRunGame ? clearButton() : addButton();
+        : (function() {
+            unlockOrientation();
+            addButton();
+        })();
 
     function addButton() {
-        let btn = document.createElement("BUTTON");
+
+        const btn = document.createElement("BUTTON");
         btn.setAttribute("id", "play");
         btn.innerHTML = "PLAY";
         document.body.appendChild(btn);
@@ -25,13 +35,55 @@ window.onload = function () {
     }
 
     function clearButton() {
-        let btn = document.querySelector("#play");
+
+        const btn = document.querySelector("#play");
+
+        if (!btn) {
+            return;
+        }
+
         btn.parentNode.removeChild(btn);
+    }
+
+    async function lockOrientationInLandscape() {
+
+        if (!isMobile()) {
+            return;
+        }
+
+        await window.screen.orientation.lock('landscape');
+    }
+
+    function unlockOrientation() {
+
+        if (!isMobile()) {
+            return;
+        }
+
+        window.screen.orientation.unlock();
+    }
+
+    function isMobile() {
+        return mobileAgents.some(function(userAgent) {
+            return !!window.navigator.userAgent.match(new RegExp(`${userAgent}`, 'i'));
+        });
     }
 };
 
 window.screen.orientation.onchange = async function() {
-    this.type.startsWith('landscape')
-        ? await document.querySelector('#defaultCanvas0').webkitRequestFullscreen() 
-        : document.webkitExitFullscreen();
-};
+
+    const canvas = document.querySelector('#defaultCanvas0');
+
+    if (canvas) {
+        await canvas.requestFullscreen();
+        return;
+    }
+
+    if (isFullScreen()) {
+        await document.exitFullscreen();
+    }
+    
+    function isFullScreen() {
+        return window.screen.availWidth === window.innerWidth && window.screen.availHeight === window.innerHeight;
+    }
+}

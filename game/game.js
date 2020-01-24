@@ -71,14 +71,14 @@ export default (function() {
 
     const checkCollision = function() {
 
-        let particles = particleSystem.getParticles();
+        const particles = particleSystem.getParticles();
 
         for (let particle of particles) {
             if (player.hits(particle)) {
                 noLoop();
                 textSize(window.innerWidth / 12);
                 text('Game Over', window.innerWidth * 0.3, window.innerHeight * 0.4);
-                setTimeout(function(){
+                setTimeout(function() {
                     window.sessionStorage.removeItem("readyToRunGame");
                     window.location.reload(true); 
                 }, 2000);
