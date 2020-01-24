@@ -51,7 +51,7 @@ window.onload = function() {
             return;
         }
 
-        await window.screen.orientation.lock('landscape');
+        await window.screen.orientation.lock('landscape-primary');
     }
 
     function unlockOrientation() {
@@ -70,11 +70,11 @@ window.onload = function() {
     }
 };
 
-window.screen.orientation.onchange = async function() {
+window.onorientationchange = async function() {
 
     const canvas = document.querySelector('#defaultCanvas0');
 
-    if (canvas) {
+    if (canvas && !isFullScreen()) {
         await canvas.requestFullscreen();
         return;
     }
