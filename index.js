@@ -8,7 +8,7 @@ document.onreadystatechange = function() {
 };
 
 
-window.onload = function() {
+window.onload = function () {
 
     window.sessionStorage.readyToRunGame ? clearButton() : addButton();
 
@@ -28,4 +28,10 @@ window.onload = function() {
         let btn = document.querySelector("#play");
         btn.parentNode.removeChild(btn);
     }
+};
+
+window.screen.orientation.onchange = async function() {
+    this.type.startsWith('landscape')
+        ? await document.querySelector('#defaultCanvas0').webkitRequestFullscreen() 
+        : document.webkitExitFullscreen();
 };
