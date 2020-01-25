@@ -1,5 +1,5 @@
 import Game from './game/game.js';
-import { mobileAgents } from './game/constants.js';
+import { isMobile, controls } from './game/mobile.js';
 
 document.onreadystatechange = function() {
 
@@ -10,30 +10,70 @@ document.onreadystatechange = function() {
 
 window.onload = function() {
 
-    window.sessionStorage.readyToRunGame ? clearButton() : addButton(); 
+    window.sessionStorage.readyToRunGame ? clearMenuButton() : addMenuButton(); 
 
-    function addButton() {
+    function addMenuButton() {
 
-        const btn = document.createElement("BUTTON");
-        btn.setAttribute("id", "play");
-        btn.innerHTML = "PLAY";
-        document.body.appendChild(btn);
+        const button = document.createElement('BUTTON');
+        button.id = 'play';
+        button.innerHTML = "PLAY";
+        document.body.appendChild(button);
 
-        btn.addEventListener("click", function() {
+        button.onclick = function() {
             window.sessionStorage.setItem("readyToRunGame", true);
             window.location.reload(true);
-        });
-    }
+        };
 
-    function clearButton() {
-
-        const btn = document.querySelector("#play");
-
-        if (!btn) {
+        if (!isMobile()) {
             return;
         }
 
-        btn.parentNode.removeChild(btn);
+        removeMobileControls();
+    }
+
+    function clearMenuButton() {
+
+        const button = document.querySelector("#play");
+
+        if (!button) {
+            return;
+        }
+
+        button.parentNode.removeChild(button);
+
+        if (!isMobile()) {
+            return;
+        }
+
+        addMobileControls();
+    }
+
+    function addMobileControls() {
+
+        arrayWithTouchStartHandlers
+        arrayWithTouchEndHandlers
+        controls.forEach(function(control){
+
+            let button = document.createElement('BUTTON');
+            button.id = control;
+            button.ontouchstart = arrayWithTouchStartHandlers[index];
+            button.ontouchend = arrayWithTouchEndHandlers[index];
+            document.body.appendChild(button);
+        });
+    }
+
+    function removeMobileControls() {
+
+        controls.forEach(function(control) {
+
+            let button = document.querySelector(`#${control}`); 
+            
+            if (!button) {
+                return;
+            }
+    
+            button.parentNode.removeChild(button);
+        });
     }
 };
 
@@ -57,10 +97,5 @@ window.screen.orientation.onchange = async function() {
             window.screen.orientation.lock(window.screen.orientation.type)
         ]);
     }
-
-    function isMobile() {
-        return mobileAgents.some(function(userAgent) {
-            return !!window.navigator.userAgent.match(new RegExp(`${userAgent}`, 'i'));
-        });
-    }
 };
+

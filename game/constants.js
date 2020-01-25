@@ -1,6 +1,5 @@
 const width = window.innerWidth;
 const height = window.innerHeight;
-const mobileAgents = ['android', 'iphone', 'ipad', 'blackberry', 'windows phone', 'webos'];
 
 export default {
     SPACE : 32,
@@ -11,4 +10,4 @@ export default {
     SYSTEM_STARTING_Y : height / 6
 };
 
-export { mobileAgents };
+
