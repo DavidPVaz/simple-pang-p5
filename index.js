@@ -1,5 +1,5 @@
 import Game from './game/game.js';
-import { isMobile, controls } from './game/mobile.js';
+import { isMobile, addMobileControls, removeMobileControls } from './game/mobile.js';
 
 document.onreadystatechange = function() {
 
@@ -46,34 +46,6 @@ window.onload = function() {
         }
 
         addMobileControls();
-    }
-
-    function addMobileControls() {
-
-        arrayWithTouchStartHandlers
-        arrayWithTouchEndHandlers
-        controls.forEach(function(control){
-
-            let button = document.createElement('BUTTON');
-            button.id = control;
-            button.ontouchstart = arrayWithTouchStartHandlers[index];
-            button.ontouchend = arrayWithTouchEndHandlers[index];
-            document.body.appendChild(button);
-        });
-    }
-
-    function removeMobileControls() {
-
-        controls.forEach(function(control) {
-
-            let button = document.querySelector(`#${control}`); 
-            
-            if (!button) {
-                return;
-            }
-    
-            button.parentNode.removeChild(button);
-        });
     }
 };
 

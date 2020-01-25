@@ -7,6 +7,33 @@ function isMobile() {
     });
 }
 
-export { isMobile };
+function addMobileControls() {
 
-export { controls }
+    arrayWithTouchStartHandlers
+    arrayWithTouchEndHandlers
+    
+    controls.forEach(function(control){
+
+        let button = document.createElement('BUTTON');
+        button.id = control;
+        button.ontouchstart = arrayWithTouchStartHandlers[index];
+        button.ontouchend = arrayWithTouchEndHandlers[index];
+        document.body.appendChild(button);
+    });
+}
+
+function removeMobileControls() {
+
+    controls.forEach(function(control) {
+
+        let button = document.querySelector(`#${control}`); 
+        
+        if (!button) {
+            return;
+        }
+
+        button.parentNode.removeChild(button);
+    });
+}
+
+export { isMobile, addMobileControls, removeMobileControls };
