@@ -10,16 +10,7 @@ document.onreadystatechange = function() {
 
 window.onload = function() {
 
-    window.sessionStorage.readyToRunGame 
-        ? (async function() {
-            clearButton();
-            await lockOrientationInLandscape();
-        })()
-
-        : (function() {
-            unlockOrientation();
-            addButton();
-        })();
+    window.sessionStorage.readyToRunGame ? clearButton() : addButton(); 
 
     function addButton() {
 
@@ -44,23 +35,27 @@ window.onload = function() {
 
         btn.parentNode.removeChild(btn);
     }
+};
 
-    async function lockOrientationInLandscape() {
 
-        if (!isMobile()) {
-            return;
+window.screen.orientation.onchange = async function() {
+
+    const canvas = document.querySelector('#defaultCanvas0');
+
+    if (isMobile() && canvas) {
+
+        try {
+            await goFullScreenAndLock();
+        } catch (error) {
+            console.error(error);
         }
-
-        await window.screen.orientation.lock('landscape-primary');
     }
 
-    function unlockOrientation() {
-
-        if (!isMobile()) {
-            return;
-        }
-
-        window.screen.orientation.unlock();
+    function goFullScreenAndLock() {
+        return Promise.all([
+            canvas.requestFullscreen(), 
+            window.screen.orientation.lock(window.screen.orientation.type)
+        ]);
     }
 
     function isMobile() {
@@ -69,21 +64,3 @@ window.onload = function() {
         });
     }
 };
-
-window.onorientationchange = async function() {
-
-    const canvas = document.querySelector('#defaultCanvas0');
-
-    if (canvas && !isFullScreen()) {
-        await canvas.requestFullscreen();
-        return;
-    }
-
-    if (isFullScreen()) {
-        await document.exitFullscreen();
-    }
-    
-    function isFullScreen() {
-        return window.screen.availWidth === window.innerWidth && window.screen.availHeight === window.innerHeight;
-    }
-}
