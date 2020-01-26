@@ -4,7 +4,9 @@ import constants from './constants.js';
 
 let particleSystem, player;
 let rightIsBeingPressed, leftIsBeingPressed = false;
-const { SYSTEM_STARTING_X, SYSTEM_STARTING_Y, PLAYER_STARTING_X, PLAYER_STARTING_Y, PLAYER_STARTING_RADIUS, SPACE } = constants;
+const { 
+    SYSTEM_STARTING_X, SYSTEM_STARTING_Y, PLAYER_STARTING_X, PLAYER_STARTING_Y, PLAYER_STARTING_RADIUS, SPACE, UP, LEFT, RIGHT 
+} = constants;
 
 export default (function() {
 
@@ -25,18 +27,19 @@ export default (function() {
         player.setDirection(leftIsBeingPressed && !rightIsBeingPressed ? -1 : rightIsBeingPressed && !leftIsBeingPressed ? 1 : 0);
     };
 
-    const keyPressed = function() {
+    const keyPressed = function(event) {
+        console.log(event)
         switch (keyCode) {
-            case LEFT_ARROW:
+            case LEFT:
                 leftIsBeingPressed = true;
                 break;
-            case RIGHT_ARROW:
+            case RIGHT:
                 rightIsBeingPressed = true;
                 break;
             case SPACE:
                 player.loadBullet();
                 break;
-            case UP_ARROW:
+            case UP:
                 player.jump();
                 break;
         }
@@ -44,10 +47,10 @@ export default (function() {
 
     const keyReleased = function() {
         switch (keyCode) {
-            case LEFT_ARROW:
+            case LEFT:
                 leftIsBeingPressed = false;
                 break;
-            case RIGHT_ARROW:
+            case RIGHT:
                 rightIsBeingPressed = false;
                 break;
         }

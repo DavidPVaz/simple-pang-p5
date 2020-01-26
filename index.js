@@ -1,5 +1,5 @@
 import Game from './game/game.js';
-import { isMobile, addMobileControls, removeMobileControls } from './game/mobile.js';
+import { isMobile, addMobileControls } from './game/mobile.js';
 
 document.onreadystatechange = function() {
 
@@ -10,7 +10,7 @@ document.onreadystatechange = function() {
 
 window.onload = function() {
 
-    window.sessionStorage.readyToRunGame ? clearMenuButton() : addMenuButton(); 
+    window.sessionStorage.readyToRunGame ? addMobileControls() : addMenuButton(); 
 
     function addMenuButton() {
 
@@ -23,32 +23,8 @@ window.onload = function() {
             window.sessionStorage.setItem("readyToRunGame", true);
             window.location.reload(true);
         };
-
-        if (!isMobile()) {
-            return;
-        }
-
-        removeMobileControls();
-    }
-
-    function clearMenuButton() {
-
-        const button = document.querySelector("#play");
-
-        if (!button) {
-            return;
-        }
-
-        button.parentNode.removeChild(button);
-
-        if (!isMobile()) {
-            return;
-        }
-
-        addMobileControls();
     }
 };
-
 
 window.screen.orientation.onchange = async function() {
 

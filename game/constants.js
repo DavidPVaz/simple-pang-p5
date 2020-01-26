@@ -2,6 +2,9 @@ const width = window.innerWidth;
 const height = window.innerHeight;
 
 export default {
+    UP: 38,
+    LEFT: 37,
+    RIGHT: 39,
     SPACE : 32,
     PLAYER_STARTING_X : width / 2,
     PLAYER_STARTING_Y : height,

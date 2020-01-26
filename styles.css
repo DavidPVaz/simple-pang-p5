@@ -2,11 +2,42 @@ body {
 	background-image: url("./resources/simple-pang.png");
 }
 
-#play {
-    position: absolute;
-    top: 42%;
-    left: 45%;
-    margin-right: -50%;
+#defaultCanvas0 {
+	margin-left:-15px;
+	margin-bottom: -8px;
+    border: #0d090d 2px solid;
+}
+
+button {
+	background-color: #b12d1c;
+	border: none;
+	font-size: 10px;
+	border-radius: 50%;
+	color: #b12d1c;
+	position: absolute;
+	top: 93%;
+}
+
+button#up {
+	left: 91%;
+	top: 88%;
+}
+
+button#left {
+	left: 88%;
+}
+
+button#right {
+	left: 94%;
+}
+
+button#shoot {
+	left: 5%;
+}
+
+button#play {
+	left: 45%;
+	top: 45%;
 	box-shadow:inset 0px 1px 0px 0px #ffffff;
 	background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
 	background-color:#ededed;
@@ -22,13 +53,8 @@ body {
 	text-decoration:none;
 	text-shadow:0px 1px 0px #ffffff;
 }
-#play:hover {
+
+button#play:hover {
 	background:linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
 	background-color:#dfdfdf;
-}
-
-#defaultCanvas0 {
-	margin-left:-15px;
-	margin-bottom: -8px;
-    border: #0d090d 2px solid;
 }
