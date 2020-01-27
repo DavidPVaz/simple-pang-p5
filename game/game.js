@@ -1,19 +1,20 @@
 import ParticleSystem from '../particle/particleSystem.js';
 import Player from '../collidable/player/player.js';
 import constants from './constants.js';
+import { isMobile } from './mobile.js';
 
 let particleSystem, player;
 let rightIsBeingPressed, leftIsBeingPressed = false;
 const { 
-    SYSTEM_STARTING_X, SYSTEM_STARTING_Y, PLAYER_STARTING_X, PLAYER_STARTING_Y, PLAYER_STARTING_RADIUS, SPACE, UP, LEFT, RIGHT 
+    SYSTEM_STARTING_X, SYSTEM_STARTING_Y, PLAYER_STARTING_X, PLAYER_STARTING_Y, PLAYER_PC_RADIUS, PLAYER_MOBILE_RADIUS, SPACE, UP, LEFT, RIGHT 
 } = constants;
 
 export default (function() {
 
     const setup = function() {
         createCanvas(window.innerWidth, window.innerHeight);
-        particleSystem = new ParticleSystem(createVector(SYSTEM_STARTING_X, SYSTEM_STARTING_Y));
-        player = new Player(createVector(PLAYER_STARTING_X, PLAYER_STARTING_Y), PLAYER_STARTING_RADIUS);
+        particleSystem = new ParticleSystem(createVector(SYSTEM_STARTING_X, SYSTEM_STARTING_Y), isMobile());
+        player = new Player(createVector(PLAYER_STARTING_X, PLAYER_STARTING_Y), isMobile() ? PLAYER_MOBILE_RADIUS : PLAYER_PC_RADIUS);
     };
 
     const draw = function() {
@@ -27,8 +28,7 @@ export default (function() {
         player.setDirection(leftIsBeingPressed && !rightIsBeingPressed ? -1 : rightIsBeingPressed && !leftIsBeingPressed ? 1 : 0);
     };
 
-    const keyPressed = function(event) {
-        console.log(event)
+    const keyPressed = function() {
         switch (keyCode) {
             case LEFT:
                 leftIsBeingPressed = true;
@@ -68,8 +68,8 @@ export default (function() {
     const printLevel = function() {
         noStroke();
         fill(255);
-        textSize(50);
-        text('Level: ' + nf(particleSystem.getLevel()), window.innerWidth * 0.02, window.innerHeight * 0.08);
+        textSize(window.innerHeight / 20);
+        text('Level: ' + nf(particleSystem.getLevel()), window.innerWidth * 0.02, window.innerHeight * 0.05);
     };
 
     const checkCollision = function() {

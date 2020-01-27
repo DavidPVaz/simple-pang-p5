@@ -4,12 +4,12 @@ const ParticleSystem = (function() {
 
     const privateMethodsMap = new WeakMap();
 
-    const ParticleSystem = function(position) {
+    const ParticleSystem = function(position, isMobile) {
         this.origin = position.copy();
         this.particles = [];
         this.numberOfParticles = 2;
         this.incrementParticles = 2;
-        this.initialRadius = 80;
+        this.initialRadius = isMobile ? 50 : 80;
         this.level = 1;
 
         const resetParticles = () => {
