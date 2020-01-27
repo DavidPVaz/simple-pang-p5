@@ -46,8 +46,8 @@ function addMobileControls() {
         let button = document.createElement('BUTTON');
         button.id = control;
         button.innerHTML = control.substring(0, 1);
-        button.ontouchstart = touchStartHandlers[index];
-        button.ontouchend = touchEndHandlers[index];
+        button.addEventListener('touchstart', touchStartHandlers[index], { passive: true });
+        button.addEventListener('touchend', touchEndHandlers[index], { passive: true });
         document.body.appendChild(button);
     });
 }
