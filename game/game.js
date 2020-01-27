@@ -78,6 +78,7 @@ export default (function() {
 
         for (let particle of particles) {
             if (player.hits(particle)) {
+                window.navigator.vibrate(200);
                 noLoop();
                 textSize(window.innerWidth / 12);
                 text('Game Over', window.innerWidth * 0.3, window.innerHeight * 0.4);
