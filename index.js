@@ -41,7 +41,7 @@ window.screen.orientation.onchange = async function() {
 
     function goFullScreenAndLock() {
         return Promise.all([
-            canvas.requestFullscreen(), 
+            document.body.requestFullscreen(), 
             window.screen.orientation.lock(window.screen.orientation.type)
         ]);
     }
